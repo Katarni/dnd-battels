@@ -1,0 +1,21 @@
+body {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+header {
+    background: #fffaf3;
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+#header-title {
+    color: #797593;
+    margin-left: 30px
+}
+
+main {
+    background: #faf4ed;
+}
