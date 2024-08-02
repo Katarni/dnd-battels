@@ -84,6 +84,6 @@
     width: 10%;
 }
 
-input:focus {
+.input-field:focus {
     outline: none;
 }

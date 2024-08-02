@@ -5,7 +5,7 @@ It's util for manage battles in DnD
 ## Now you can
 
 + add character
-+ check hp of character
++ check character's HP
 + clear characters list
 
 ## TODO
@@ -15,3 +15,4 @@ It's util for manage battles in DnD
 + storing battles
 + export to JSON
 + import from JSON
++ day and night themes

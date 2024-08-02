@@ -49,6 +49,33 @@ function setHealthColor(id) {
 }
 
 function addCharacter() {
+    if (document.querySelector("[name='char-name']").value == "") {
+        alert("Field 'Name' is empty");
+        return;
+    }
+
+    if (document.querySelector("[name='hp']").value == "") {
+        alert("Field 'HP' is empty");
+        return;
+    }
+
+    if (document.querySelector("[name='max-hp']").value == "") {
+        alert("Field 'Max HP' is empty");
+        return;
+    }
+
+    if (parseInt(document.querySelector("[name='hp']").value) > parseInt(document.querySelector("[name='max-hp']").value)) {
+        alert("HP value bigger than max HP");
+        return;
+    }
+
+    for (let i = 0; i < parseInt(localStorage.getItem("counting")); ++i) {
+        if (document.querySelector("[name='char-name']").value == getVal(i.toString(), "name")) {
+            alert("Character with name: '" + document.querySelector("[name='char-name']").value + "' already exists");
+            return;
+        }
+    }
+
     const character = document.createElement('div');
     character.classList.add("character-box");
     character.id = "char-" + localStorage.getItem("counting");
@@ -76,9 +103,13 @@ function addCharacter() {
     localStorage.setItem("char-" + localStorage.getItem("counting") + "-max-hp",
                             document.querySelector("[name='max-hp']").value);
 
-    localStorage.setItem("counting", (parseInt(localStorage.getItem("counting")) + 1).toString());
+    document.querySelector("[name='char-name']").value = "";
+    document.querySelector("[name='hp']").value = "";
+    document.querySelector("[name='max-hp']").value = "";
 
     setHealthColor(localStorage.getItem("counting"));
+
+    localStorage.setItem("counting", (parseInt(localStorage.getItem("counting")) + 1).toString());
 
     document.querySelector(".add-char-btn").classList.add("add-char-btn-closed");
     document.querySelector(".add-char-btn").classList.remove("add-char-btn-opened");

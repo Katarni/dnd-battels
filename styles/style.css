@@ -55,9 +55,18 @@ main {
     border-radius: 10px;
 }
 
-.remove-btn:hover {
-    color: #fffaf3;
-    background: #b4637a;
+@media (hover: hover) {
+    .remove-btn:hover {
+        color: #fffaf3;
+        background: #b4637a;
+    }
+}
+
+@media (hover: none) {
+    .remove-btn:active {
+        color: #fffaf3;
+        background: #b4637a;
+    }
 }
 
 .bi-trash {
