@@ -6,6 +6,9 @@ function getVal(id, name) {
     return localStorage.getItem("char-" + id + "-" + name)
 }
 
+document.querySelector(".add-char-btn").onclick = openInputFields;
+document.querySelector(".remove-btn").onclick = clearCharacters;
+
 for (let i = 0; i < parseInt(localStorage.getItem("counting")); ++i) {
     const character = document.createElement('div');
     character.classList.add("character-box");
@@ -25,7 +28,7 @@ for (let i = 0; i < parseInt(localStorage.getItem("counting")); ++i) {
                         '</span>';
     character.appendChild(hp_box);
 
-    document.querySelector("main").appendChild(character);
+    document.querySelector('.add-char-box').insertAdjacentElement("afterend", character);
 
     setHealthColor(i.toString());
 }
@@ -64,7 +67,7 @@ function addCharacter() {
                         '</span>';
     character.appendChild(hp_box);
 
-    document.querySelector('main').appendChild(character);
+    document.querySelector('.add-char-box').insertAdjacentElement("afterend", character);
 
     setHealthColor(localStorage.getItem("counting"));
 
@@ -112,4 +115,14 @@ function openInputFields() {
     document.querySelector(".add-char-btn").onclick = addCharacter;
 }
 
-document.querySelector(".add-char-btn").onclick = openInputFields;
+function clearCharacters() {
+    for (let i = 0; i < parseInt(localStorage.getItem("counting")); ++i) {
+        localStorage.removeItem("char-" + i.toString() + "-name");
+        localStorage.removeItem("char-" + i.toString() + "-hp");
+        localStorage.removeItem("char-" + i.toString() + "-max-hp");
+
+        document.querySelector("main").removeChild(document.querySelector("#char-" + i.toString()));
+    }
+
+    localStorage.setItem("counting", "0");
+}
