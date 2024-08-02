@@ -9,9 +9,25 @@ for (let i = 0; i < parseInt(localStorage.getItem("counting")); ++i) {
 }
 
 function addCharacter() {
-    // const character = document.createElement('div');
-    // character.classList.add("character-box");
-    // document.querySelector("main").appendChild(character);
+    const character = document.createElement('div');
+    character.classList.add("character-box");
+    character.id = "char-" + localStorage.getItem("counting");
+
+    const name = document.createElement('h2');
+    name.classList.add("char-name");
+    name.innerHTML = document.querySelector("[name='char-name']").value;
+    character.appendChild(name);
+
+    const hp_box = document.createElement('p');
+    hp_box.classList.add('hp-box');
+    hp_box.innerHTML = '<span class="hp">' +
+                        document.querySelector("[name='hp']").value +
+                        '</span>/<span class="max-hp">' +
+                        document.querySelector("[name='max-hp']").value +
+                        '</span>';
+    character.appendChild(hp_box);
+
+    document.querySelector('main').appendChild(character);
 
     // localStorage.setItem("counting", (parseInt(localStorage.getItem("counting")) + 1).toString());
 
@@ -29,7 +45,7 @@ function addCharacter() {
         boxes[i].classList.remove("input-box-opened");
     }
 
-    document.querySelector(".add-char-btn").addEventListener("click", () => openInputFields());
+    document.querySelector(".add-char-btn").onclick = openInputFields;
 }
 
 function openInputFields() {
@@ -47,7 +63,7 @@ function openInputFields() {
         boxes[i].classList.add("input-box-opened");
     }
 
-    document.querySelector(".add-char-btn").addEventListener("click", () => addCharacter());
+    document.querySelector(".add-char-btn").onclick = addCharacter;
 }
 
-document.querySelector(".add-char-btn").addEventListener("click", () => openInputFields());
+document.querySelector(".add-char-btn").onclick = openInputFields;
