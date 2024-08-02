@@ -69,8 +69,6 @@ function addCharacter() {
 
     document.querySelector('.add-char-box').insertAdjacentElement("afterend", character);
 
-    setHealthColor(localStorage.getItem("counting"));
-
     localStorage.setItem("char-" + localStorage.getItem("counting") + "-name",
                             document.querySelector("[name='char-name']").value);
     localStorage.setItem("char-" + localStorage.getItem("counting") + "-hp",
@@ -79,6 +77,8 @@ function addCharacter() {
                             document.querySelector("[name='max-hp']").value);
 
     localStorage.setItem("counting", (parseInt(localStorage.getItem("counting")) + 1).toString());
+
+    setHealthColor(localStorage.getItem("counting"));
 
     document.querySelector(".add-char-btn").classList.add("add-char-btn-closed");
     document.querySelector(".add-char-btn").classList.remove("add-char-btn-opened");
