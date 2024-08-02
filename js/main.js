@@ -2,6 +2,8 @@ if (localStorage.getItem("counting") === null) {
     localStorage.setItem("counting", "0");
 }
 
+localStorage.setItem("counting", "0");
+
 for (let i = 0; i < parseInt(localStorage.getItem("counting")); ++i) {
     const character = document.createElement('div');
     character.classList.add("character-box");
