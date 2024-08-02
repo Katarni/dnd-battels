@@ -2,12 +2,47 @@ if (localStorage.getItem("counting") === null) {
     localStorage.setItem("counting", "0");
 }
 
-localStorage.setItem("counting", "0");
+function getVal(id, name) {
+    return localStorage.getItem("char-" + id + "-" + name)
+}
 
 for (let i = 0; i < parseInt(localStorage.getItem("counting")); ++i) {
     const character = document.createElement('div');
     character.classList.add("character-box");
+    character.id = "char-" + i.toString();
+
+    const name = document.createElement('h2');
+    name.classList.add("char-name");
+    name.innerHTML = localStorage.getItem("char-" + i.toString() + "-name");
+    character.appendChild(name);
+
+    const hp_box = document.createElement('p');
+    hp_box.classList.add('hp-box');
+    hp_box.innerHTML = '<span class="hp">' +
+                        localStorage.getItem("char-" + i.toString() + "-hp") +
+                        '</span>/<span class="max-hp">' +
+                        localStorage.getItem("char-" + i.toString() + "-max-hp") +
+                        '</span>';
+    character.appendChild(hp_box);
+
     document.querySelector("main").appendChild(character);
+
+    setHealthColor(i.toString());
+}
+
+function setHealthColor(id) {
+    let hp_box = document.querySelector("#char-" + id).children[1];
+
+    hp_box.className = "";
+    hp_box.classList.add("hp-box");
+
+    if (parseInt(getVal(id, "hp")) >= 0.5 * parseInt(getVal(id, "max-hp"))) {
+        hp_box.classList.add("high-hp");
+    } else if (parseInt(getVal(id, "hp")) >= 0.2 * parseInt(getVal(id, "max-hp"))) {
+        hp_box.classList.add("medium-hp");
+    } else {
+        hp_box.classList.add("low-hp");
+    }
 }
 
 function addCharacter() {
@@ -31,7 +66,16 @@ function addCharacter() {
 
     document.querySelector('main').appendChild(character);
 
-    // localStorage.setItem("counting", (parseInt(localStorage.getItem("counting")) + 1).toString());
+    setHealthColor(localStorage.getItem("counting"));
+
+    localStorage.setItem("char-" + localStorage.getItem("counting") + "-name",
+                            document.querySelector("[name='char-name']").value);
+    localStorage.setItem("char-" + localStorage.getItem("counting") + "-hp",
+                            document.querySelector("[name='hp']").value);
+    localStorage.setItem("char-" + localStorage.getItem("counting") + "-max-hp",
+                            document.querySelector("[name='max-hp']").value);
+
+    localStorage.setItem("counting", (parseInt(localStorage.getItem("counting")) + 1).toString());
 
     document.querySelector(".add-char-btn").classList.add("add-char-btn-closed");
     document.querySelector(".add-char-btn").classList.remove("add-char-btn-opened");
