@@ -1,0 +1,89 @@
+.add-char-box {
+    width: 80%;
+
+    background: #f2e9e1;
+    border: 1px solid #cecacd;
+    border-radius: 15px;
+}
+
+.add-char-box-closed {
+    height: 80px;
+}
+
+.add-char-box-opened {
+    height: 240px;
+}
+
+.add-char-btn {
+    background: transparent;
+    border: none;
+
+    height: 80px;
+    width: 100%;
+
+    color: #575279;
+    font-size: 40px;
+}
+
+.add-char-btn-opened {
+    border-top: 1px solid #cecacd;
+
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.add-char-btn-closed {
+    border-radius: 15px;
+}
+
+.input-box {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-box-closed {
+    visibility: hidden;
+    height: 0;
+}
+
+.input-box-opened {
+    visibility: visible;
+    height: 80px;
+}
+
+.input-name {
+    color: #575279;
+    font-size: 25px;
+
+    margin-right: 5px;
+    margin-left: 20px;
+}
+
+.input-field {
+    background: #f2e9e1;
+    border: 1px solid #cecacd;
+    border-radius: 5px;
+
+    height: 30px;
+    font-size: 23px;
+    color: #575279;
+
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.input-field-text {
+    width: 30%;
+}
+
+.input-field-number {
+    width: 10%;
+}
+
+input:focus {
+    outline: none;
+}

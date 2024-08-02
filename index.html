@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/add-char.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
@@ -12,8 +13,21 @@
     </header>
 
     <main>
-        <div class="charapter-box">
-            <button class="add-char-btn">+</button>
+        <div class="add-char-box add-char-box-closed">
+            <div hidden="hidden" class="input-box input-box-closed">
+                <p for="char-name" class="input-name">Name:</p>
+                <input type="text" name="char-name" class="input-field input-field-text">
+            </div>
+
+            <div hidden="hidden" class="input-box input-box-closed">
+                <p for="hp" class="input-name">HP:</p>
+                <input type="number" name="hp" class="input-field input-field-number">
+
+                <p for="max-hp" class="input-name">Max HP:</p>
+                <input type="number" name="max-hp" class="input-field input-field-number">
+            </div>
+
+            <button class="add-char-btn add-char-btn-closed">+</button>
         </div>
     </main>
 
