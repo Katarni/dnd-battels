@@ -7,7 +7,8 @@ function getVal(id, name) {
 }
 
 document.querySelector(".add-char-btn").onclick = openInputFields;
-document.querySelector(".remove-btn").onclick = clearCharacters;
+document.querySelector("#remove-all-btn").onclick = clearCharacters;
+document.querySelector("#reorder-btn").onclick = reorderCharacters;
 
 for (let i = 0; i < parseInt(localStorage.getItem("counting")); ++i) {
     document.querySelector('.add-char-box').insertAdjacentElement("afterend", getCharElm(i.toString()));
@@ -55,6 +56,10 @@ function addCharacter() {
         document.querySelector("[name='max-hp']").classList.remove("input-box-incorrect")
     }
 
+    if (document.querySelector("[name='initiative']").value == "") {
+        document.querySelector("[name='initiative']").value = "0";
+    }
+
     if (parseInt(document.querySelector("[name='hp']").value) > parseInt(document.querySelector("[name='max-hp']").value)) {
         document.querySelector("[name='hp']").value = document.querySelector("[name='max-hp']").value;
     }
@@ -65,6 +70,8 @@ function addCharacter() {
                             document.querySelector("[name='hp']").value);
     localStorage.setItem("char-" + localStorage.getItem("counting") + "-max-hp",
                             document.querySelector("[name='max-hp']").value);
+    localStorage.setItem("char-" + localStorage.getItem("counting") + "-initiative",
+                            document.querySelector("[name='initiative']").value);
 
     document.querySelector("[name='char-name']").value = "";
     document.querySelector("[name='hp']").value = "";
@@ -120,6 +127,7 @@ function clearCharacters() {
         localStorage.removeItem("char-" + i.toString() + "-name");
         localStorage.removeItem("char-" + i.toString() + "-hp");
         localStorage.removeItem("char-" + i.toString() + "-max-hp");
+        localStorage.removeItem("char-" + i.toString() + "-initiative");
 
         document.querySelector("main").removeChild(document.querySelector("#char-" + i.toString()));
     }
@@ -240,6 +248,7 @@ function deleteChar(id) {
         localStorage.setItem("char-" + (i-1).toString() + "-name", getVal(i.toString(), "name"));
         localStorage.setItem("char-" + (i-1).toString() + "-hp", getVal(i.toString(), "hp"));
         localStorage.setItem("char-" + (i-1).toString() + "-max-hp", getVal(i.toString(), "max-hp"));
+        localStorage.setItem("char-" + (i-1).toString() + "-initiative", getVal(i.toString(), "initiative"));
 
         document.querySelector("#char-" + i.toString()).id = "char-" + (i-1).toString();
     }
@@ -248,6 +257,7 @@ function deleteChar(id) {
     localStorage.removeItem("char-" + localStorage.getItem("counting") + "-name");
     localStorage.removeItem("char-" + localStorage.getItem("counting") + "-hp");
     localStorage.removeItem("char-" + localStorage.getItem("counting") + "-max-hp");
+    localStorage.removeItem("char-" + localStorage.getItem("counting") + "-initiative");
 }
 
 function openHealthCalc() {
@@ -335,4 +345,8 @@ function healChar(mul) {
     setHealthColor(id.substring(5, id.length));
 
     document.querySelector("[name='hp-delta']").value = "";
+}
+
+function reorderCharacters() {
+
 }
