@@ -29,7 +29,11 @@
     margin-right: 20px;
 
     height: 200px;
-    width: 220px;
+    width: 200px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .char-name {
@@ -49,6 +53,10 @@
 .info-btn {
     border: none;
     background: transparent;
+}
+
+.info-btn-opened {
+    transform: rotate(180deg);
 }
 
 .bi-chevron-compact-down {
@@ -80,4 +88,38 @@
 .high-hp {
     color: #56949f;
     /* border: 1px solid #56949f; */
+}
+
+#health-btn {
+    border: 2px solid #56949f;
+
+    color: #56949f;
+}
+
+.add-info-btn {
+    background: transparent;
+    border-radius: 10px;
+
+    width: 120px;
+    height: 40px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+    margin-top: 15px;
+
+    font-family: "Montserrat";
+    font-size: 20px;
+}
+
+.add-info-btn > p {
+    margin: 0;
+}
+
+#health-btn > .bi-heart {
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
 }
