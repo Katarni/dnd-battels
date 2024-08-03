@@ -124,11 +124,28 @@ function clearCharacters() {
         document.querySelector("main").removeChild(document.querySelector("#char-" + i.toString()));
     }
 
+    if (document.querySelector("#char-addinfo-container") != null) {
+        document.querySelector("#char-addinfo-container").remove();
+    }
+
     localStorage.setItem("counting", "0");
 }
 
 function openCharInfo(id) {
-    alert(id);
+    if (document.querySelector(".char-addinfo-container") != null) {
+        if (document.querySelector(".char-addinfo-container").id == id + "-info") {
+            document.querySelector(".char-addinfo-container").remove();
+            return;
+        }
+        document.querySelector(".char-addinfo-container").remove();
+    }
+
+    const info = document.createElement('div');
+    info.classList.add("char-addinfo-container");
+    info.id = id + "-info";
+    info.innerHTML = '<div id="char-addinfo"></div>';
+
+    document.querySelector("#" + id).insertAdjacentElement("afterend", info);
 }
 
 function getCharElm(id) {

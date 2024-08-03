@@ -13,6 +13,25 @@
     justify-content: space-between;
 }
 
+.char-addinfo-container {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+#char-addinfo {
+    background: #f2e9e1;
+    border: 1px solid #cecacd;
+    border-top: none;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-right: 20px;
+
+    height: 200px;
+    width: 220px;
+}
+
 .char-name {
     color: #575279;
     font-size: 26px;
