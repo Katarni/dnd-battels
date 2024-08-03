@@ -76,6 +76,7 @@ function addCharacter() {
     document.querySelector("[name='char-name']").value = "";
     document.querySelector("[name='hp']").value = "";
     document.querySelector("[name='max-hp']").value = "";
+    document.querySelector("[name='initiative']").value = "";
 
     document.querySelector('.add-char-box').insertAdjacentElement("afterend", getCharElm(localStorage.getItem("counting")));
 
@@ -347,6 +348,23 @@ function healChar(mul) {
     document.querySelector("[name='hp-delta']").value = "";
 }
 
-function reorderCharacters() {
+function cmpForInitiative(a, b) {
+    if (parseInt(getVal(a, "initiative")) >= parseInt(getVal(b, "initiative"))) {
+        return -1;
+    }
+    return 1;
+}
 
+function reorderCharacters() {
+    const elms = [];
+    for (let i = 0; i < parseInt(localStorage.getItem("counting")); ++i) {
+        elms.push(i.toString());
+    }
+    elms.sort(cmpForInitiative);
+
+    const main = document.querySelector("main");
+
+    for (let i = elms.length - 1; i >= 0; --i) {
+        main.insertBefore(document.querySelector("#char-" + elms[i]), document.querySelector("#char-" + elms[i + 1]));
+    }
 }
