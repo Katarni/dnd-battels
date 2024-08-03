@@ -20,6 +20,7 @@ header {
     color: #575279;
     margin-left: 30px;
     font-weight: bold;
+    font-family: "Old Standard TT";
 }
 
 main {
@@ -53,6 +54,8 @@ main {
     background: transparent;
     border: 2px solid #b4637a;
     border-radius: 10px;
+    font-weight: 500;
+    font-family: "Montserrat";
 }
 
 @media (hover: hover) {
