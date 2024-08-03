@@ -68,6 +68,11 @@ main {
     border: 2px solid #907aa9;
 }
 
+#next-turn-btn {
+    color: #286983;
+    border: 2px solid #286983;
+}
+
 @media (hover: hover) {
     #remove-all-btn:hover {
         color: #fffaf3;
@@ -78,6 +83,11 @@ main {
         color: #fffaf3;
         background: #907aa9;
     }
+
+    #next-turn-btn:hover {
+        color: #fffaf3;
+        background: #286983;
+    }
 }
 
 @media (hover: none) {
@@ -86,9 +96,14 @@ main {
         background: #b4637a;
     }
 
-    #reorder-btn:hover {
+    #reorder-btn:active {
         color: #fffaf3;
         background: #907aa9;
+    }
+
+    #next-turn-btn:active {
+        color: #fffaf3;
+        background: #286983;
     }
 }
 

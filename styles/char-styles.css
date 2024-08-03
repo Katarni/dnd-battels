@@ -6,11 +6,14 @@
     width: 80%;
     margin-top: 30px;
 
-
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+
+.selected-caracter-box {
+    border: 2px solid #286983 !important;
 }
 
 .char-addinfo-container {

@@ -137,6 +137,10 @@ function clearCharacters() {
         document.querySelector(".char-addinfo-container").remove();
     }
 
+    if (document.querySelector("#next-turn-btn") != null) {
+        document.querySelector("#next-turn-btn").remove();
+    }
+
     localStorage.setItem("counting", "0");
 }
 
@@ -205,9 +209,9 @@ function getCharElm(id) {
     character.classList.add("character-box");
     character.id = "char-" + id;
 
-    const name = document.createElement('h2');
-    name.classList.add("char-name");
-    name.innerHTML = localStorage.getItem("char-" + id + "-name");
+    const name = document.createElement('div');
+    name.classList.add("char-title");
+    name.innerHTML = '<h2 class="char-name">' + localStorage.getItem("char-" + id + "-name") + '</h2>';
     character.appendChild(name);
 
     const char_info = document.createElement('div');
@@ -243,6 +247,10 @@ function deleteChar(id) {
 
     let id_number = parseInt(id.substring(5, id.length));
 
+    if (document.querySelector("#" + id).classList.contains("selected-caracter-box")) {
+        nextTurn();
+    }
+
     document.querySelector("main").removeChild(document.querySelector("#" + id));
 
     for (let i = id_number + 1; i < parseInt(localStorage.getItem("counting")); ++i) {
@@ -259,6 +267,10 @@ function deleteChar(id) {
     localStorage.removeItem("char-" + localStorage.getItem("counting") + "-hp");
     localStorage.removeItem("char-" + localStorage.getItem("counting") + "-max-hp");
     localStorage.removeItem("char-" + localStorage.getItem("counting") + "-initiative");
+
+    if (localStorage.getItem("counting") == "0" && document.querySelector("#next-turn-btn") != null) {
+        document.querySelector("#next-turn-btn").remove();
+    }
 }
 
 function openHealthCalc() {
@@ -366,5 +378,34 @@ function reorderCharacters() {
 
     for (let i = elms.length - 1; i >= 0; --i) {
         main.insertBefore(document.querySelector("#char-" + elms[i]), document.querySelector("#char-" + elms[i + 1]));
+    }
+
+    if (document.querySelector("#next-turn-btn") != null) return;
+
+    const next_btn = document.createElement('button');
+    next_btn.id = "next-turn-btn";
+    next_btn.classList.add("action-btn");
+    next_btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" ' +
+                                ' class="bi bi-arrow-right-circle" viewBox="0 0 16 16">' +
+                            '<path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 ' +
+                                ' 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 ' +
+                                ' 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 ' +
+                                ' 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>' +
+                        '</svg>' +
+                        '<p class="action-btn-text">Next</p>';
+    next_btn.addEventListener("click", () => nextTurn());
+    document.querySelector('.header-buttons-box').insertBefore(next_btn, document.querySelector("#reorder-btn"));
+
+    const cur_char = document.querySelector('.character-box').classList.add("selected-caracter-box");
+}
+
+function nextTurn() {
+    const curr = document.querySelector(".selected-caracter-box");
+    curr.classList.remove("selected-caracter-box");
+
+    if (curr == document.querySelector("main").lastChild) {
+        document.querySelector('.character-box').classList.add("selected-caracter-box");
+    } else {
+        curr.nextSibling.classList.add("selected-caracter-box");
     }
 }
