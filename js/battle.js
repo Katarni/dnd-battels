@@ -164,7 +164,6 @@ function openCharInfo(id) {
                                     ' 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>' +
                             '</svg>' +
                             '<p>Health</p>'
-
     box.appendChild(health_btn);
 
     const delete_btn = document.createElement('button');
@@ -179,7 +178,7 @@ function openCharInfo(id) {
                                     ' 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>' +
                             '</svg>' +
                             '<p>Delete</p>'
-
+    delete_btn.addEventListener("click", () => deleteChar(id));
     box.appendChild(delete_btn);
 
     info.appendChild(box);
@@ -224,4 +223,26 @@ function getCharElm(id) {
     character.appendChild(char_info);
 
     return character;
+}
+
+function deleteChar(id) {
+    console.log(id);
+    openCharInfo(id); // it will close info box
+
+    let id_number = parseInt(id.substring(5, id.length));
+
+    document.querySelector("main").removeChild(document.querySelector("#" + id));
+
+    for (let i = id_number + 1; i < parseInt(localStorage.getItem("counting")); ++i) {
+        localStorage.setItem("char-" + (i-1).toString() + "-name", localStorage.getItem("char-" + i.toString() + "-name"));
+        localStorage.setItem("char-" + (i-1).toString() + "-hp", localStorage.getItem("char-" + i.toString() + "-hp"));
+        localStorage.setItem("char-" + (i-1).toString() + "-max-hp", localStorage.getItem("char-" + i.toString() + "-max-hp"));
+
+        document.querySelector("#char-" + i.toString()).id = "char-" + (i-1).toString();
+    }
+
+    localStorage.setItem("counting", (parseInt(localStorage.getItem("counting")) - 1).toString());
+    localStorage.removeItem("char-" + localStorage.getItem("counting") + "-name");
+    localStorage.removeItem("char-" + localStorage.getItem("counting") + "-hp");
+    localStorage.removeItem("char-" + localStorage.getItem("counting") + "-max-hp");
 }
