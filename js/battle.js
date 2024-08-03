@@ -124,8 +124,8 @@ function clearCharacters() {
         document.querySelector("main").removeChild(document.querySelector("#char-" + i.toString()));
     }
 
-    if (document.querySelector("#char-addinfo-container") != null) {
-        document.querySelector("#char-addinfo-container").remove();
+    if (document.querySelector(".char-addinfo-container") != null) {
+        document.querySelector(".char-addinfo-container").remove();
     }
 
     localStorage.setItem("counting", "0");
@@ -164,6 +164,7 @@ function openCharInfo(id) {
                                     ' 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>' +
                             '</svg>' +
                             '<p>Health</p>'
+    health_btn.addEventListener("click", () => openHealthCalc());
     box.appendChild(health_btn);
 
     const delete_btn = document.createElement('button');
@@ -172,10 +173,12 @@ function openCharInfo(id) {
     delete_btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" ' +
                                     ' class="bi bi-trash" viewBox="0 0 16 16">' +
                                 '<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 ' +
-                                    ' 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>' +
+                                    ' 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 ' +
+                                    ' 0v6a.5.5 0 0 0 1 0z"/>' +
                                     '<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 ' +
                                     ' 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 ' +
-                                    ' 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>' +
+                                    ' 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 ' +
+                                    ' 4zM2.5 3h11V2h-11z"/>' +
                             '</svg>' +
                             '<p>Delete</p>'
     delete_btn.addEventListener("click", () => deleteChar(id));
@@ -234,9 +237,9 @@ function deleteChar(id) {
     document.querySelector("main").removeChild(document.querySelector("#" + id));
 
     for (let i = id_number + 1; i < parseInt(localStorage.getItem("counting")); ++i) {
-        localStorage.setItem("char-" + (i-1).toString() + "-name", localStorage.getItem("char-" + i.toString() + "-name"));
-        localStorage.setItem("char-" + (i-1).toString() + "-hp", localStorage.getItem("char-" + i.toString() + "-hp"));
-        localStorage.setItem("char-" + (i-1).toString() + "-max-hp", localStorage.getItem("char-" + i.toString() + "-max-hp"));
+        localStorage.setItem("char-" + (i-1).toString() + "-name", getVal(i.toString(), "name"));
+        localStorage.setItem("char-" + (i-1).toString() + "-hp", getVal(i.toString(), "hp"));
+        localStorage.setItem("char-" + (i-1).toString() + "-max-hp", getVal(i.toString(), "max-hp"));
 
         document.querySelector("#char-" + i.toString()).id = "char-" + (i-1).toString();
     }
@@ -245,4 +248,91 @@ function deleteChar(id) {
     localStorage.removeItem("char-" + localStorage.getItem("counting") + "-name");
     localStorage.removeItem("char-" + localStorage.getItem("counting") + "-hp");
     localStorage.removeItem("char-" + localStorage.getItem("counting") + "-max-hp");
+}
+
+function openHealthCalc() {
+    document.querySelector("#char-addinfo").innerHTML = '<div class="hp-input-box">' +
+                                                            '<input inputmode="none" name="hp-delta" id="hp-delta-field">' +
+                                                            '<button id="del-btn" class="num-btn">' +
+                                                                '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"' +
+                                                                        'class="bi bi-backspace" viewBox="0 0 16 16">' +
+                                                                    '<path d="M5.83 5.146a.5.5 0 0 0 ' +
+                                                                        ' 0 .708L7.975 8l-2.147 2.146a.5.5 0 ' +
+                                                                        ' 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 ' +
+                                                                        ' 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 ' +
+                                                                        ' 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 ' +
+                                                                        ' 0 0 0-.707 0z"/>' +
+                                                                    '<path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 ' +
+                                                                        ' 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 ' +
+                                                                        ' 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 ' +
+                                                                        ' 0 1 6.603 1zm-7.08 1a1 1 0 0 0-.76.35L1 ' +
+                                                                        ' 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 ' +
+                                                                        ' 0 0 1-1V3a1 1 0 0 0-1-1z"/>' +
+                                                                '</svg>' +
+                                                            '</button>' +
+                                                        '</div>';
+
+    document.querySelector("#char-addinfo").innerHTML +='<div class="btns-box">' +
+                                                            '<button class="num-btn" id="num-btn-1">1</button>' +
+                                                            '<button class="num-btn" id="num-btn-2">2</button>' +
+                                                            '<button class="num-btn" id="num-btn-3">3</button>' +
+                                                        '</div>';
+
+    document.querySelector("#char-addinfo").innerHTML +='<div class="btns-box">' +
+                                                            '<button class="num-btn" id="num-btn-4">4</button>' +
+                                                            '<button class="num-btn" id="num-btn-5">5</button>' +
+                                                            '<button class="num-btn" id="num-btn-6">6</button>' +
+                                                        '</div>';
+
+    document.querySelector("#char-addinfo").innerHTML +='<div class="btns-box">' +
+                                                            '<button class="num-btn" id="num-btn-7">7</button>' +
+                                                            '<button class="num-btn" id="num-btn-8">8</button>' +
+                                                            '<button class="num-btn" id="num-btn-9">9</button>' +
+                                                        '</div>';
+
+    document.querySelector("#char-addinfo").innerHTML +='<div class="btns-box">' +
+                                                            '<button class="num-btn" id="heal-btn-calc">+</button>' +
+                                                            '<button class="num-btn" id="num-btn-0">0</button>' +
+                                                            '<button class="num-btn" id="damage-btn-calc">-</button>' +
+                                                        '</div>';
+
+    for (let i = 0; i <= 9; ++i) {
+        document.querySelector("#num-btn-" + i.toString()).addEventListener("click", function() {
+            document.querySelector("[name='hp-delta']").value += i.toString();
+        })
+    }
+
+    document.querySelector("#heal-btn-calc").addEventListener("click", () => healChar(1));
+    document.querySelector("#damage-btn-calc").addEventListener("click", () => healChar(-1));
+    document.querySelector("#del-btn").addEventListener("click", function() {
+        let val = document.querySelector("[name='hp-delta']").value;
+        if (val != "") {
+            document.querySelector("[name='hp-delta']").value = val.substring(0, val.length - 1);
+        }
+    });
+}
+
+function healChar(mul) {
+    if (document.querySelector("[name='hp-delta']").value == "") return;
+
+    let delta = mul * parseInt(document.querySelector("[name='hp-delta']").value);
+
+    let id = document.querySelector(".char-addinfo-container").id;
+    id = id.substring(0, id.length - 5);
+
+    localStorage.setItem(id + "-hp", parseInt(getVal(id.substring(5, id.length), "hp")) + delta);
+
+    if (parseInt(getVal(id.substring(5, id.length), "hp")) < 0) {
+        localStorage.setItem(id + "-hp", "0");
+    } else if (parseInt(getVal(id.substring(5, id.length), "hp")) > parseInt(getVal(id.substring(5, id.length), "max-hp"))) {
+        localStorage.setItem(id + "-hp", getVal(id.substring(5, id.length), "max-hp"));
+    }
+
+    console.log(getVal(id.substring(5, id.length), "hp"))
+
+    document.querySelector("#" + id).querySelector(".hp").textContent = getVal(id.substring(5, id.length), "hp");
+
+    setHealthColor(id.substring(5, id.length));
+
+    document.querySelector("[name='hp-delta']").value = "";
 }

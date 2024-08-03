@@ -28,7 +28,7 @@
     border-bottom-right-radius: 15px;
     margin-right: 20px;
 
-    height: 200px;
+    height: 280px;
     width: 200px;
 
     display: flex;
@@ -128,4 +128,84 @@
     width: 20px;
     height: 20px;
     margin-top: 3px;
+}
+
+#hp-delta-field {
+    width: 65%;
+    background: #f2e9e1;
+    border: 1px solid #cecacd;
+    border-radius: 5px;
+
+    height: 37px;
+    font-size: 23px;
+    color: #575279;
+
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 15px;
+    margin-left: 6px;
+    margin-bottom: 18px;
+}
+
+#hp-delta-field:focus {
+    outline: none;
+}
+
+.btns-box {
+    width: 90%;
+    height: 50px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.num-btn {
+    width: 29%;
+    height: 90%;
+
+    background: transparent;
+    border: 2px solid #575279;
+    border-radius: 5px;
+
+    color: #575279;
+    font-size: 23px;
+    font-family: "Montserrat";
+}
+
+#heal-btn-calc {
+    color: #56949f !important;
+    border: 2px solid #56949f !important;
+}
+
+#damage-btn-calc {
+    color: #b4637a !important;
+    border: 2px solid #b4637a !important;
+}
+
+#del-btn {
+    width: 39px;
+    height: 39px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 !important;
+    margin: 0;
+    margin-right: 2px;
+    border: none !important;
+}
+
+.bi-backspace {
+    height: 30px;
+    width: 30px;
+}
+
+.hp-input-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 }
