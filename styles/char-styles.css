@@ -96,6 +96,12 @@
     color: #56949f;
 }
 
+#delete-btn {
+    border: 2px solid #b4637a;
+
+    color: #b4637a;
+}
+
 .add-info-btn {
     background: transparent;
     border-radius: 10px;
@@ -118,7 +124,7 @@
     margin: 0;
 }
 
-#health-btn > .bi-heart {
+.add-info-btn > .bi {
     width: 20px;
     height: 20px;
     margin-top: 3px;
