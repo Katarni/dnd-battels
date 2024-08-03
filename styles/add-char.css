@@ -11,7 +11,7 @@
 }
 
 .add-char-box-opened {
-    height: 240px;
+    height: 320px;
 }
 
 .add-char-btn {
@@ -43,6 +43,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+
+.input-box-incorrect {
+    border: 2px solid #b4637a !important;
 }
 
 .input-box-closed {
