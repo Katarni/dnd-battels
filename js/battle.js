@@ -11,7 +11,7 @@ document.querySelector("#remove-all-btn").onclick = clearCharacters;
 document.querySelector("#reorder-btn").onclick = reorderCharacters;
 
 for (let i = 0; i < parseInt(localStorage.getItem("counting")); ++i) {
-    document.querySelector('.add-char-box').insertAdjacentElement("afterend", getCharElm(i.toString()));
+    document.querySelector('main').appendChild(getCharElm(i.toString()));
 
     let info = document.querySelector("#char-" + i.toString()).children[1].children[1];
     info.addEventListener("click", () => openCharInfo(info.parentNode.parentNode.id));
@@ -196,6 +196,32 @@ function openCharInfo(id) {
                             '<p>Delete</p>'
     delete_btn.addEventListener("click", () => deleteChar(id));
     box.appendChild(delete_btn);
+
+    const up_btn = document.createElement('button');
+    up_btn.classList.add("add-info-btn");
+    up_btn.classList.add("move-btn");
+    up_btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" ' +
+                            ' class="bi bi-arrow-up-circle" viewBox="0 0 16 16">' +
+                            '<path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 ' +
+                            ' 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 ' +
+                            ' 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>' +
+                        '</svg>' +
+                        '<p>Move</p>';
+    up_btn.addEventListener("click", () => moveChar(id, 1));
+    box.appendChild(up_btn);
+
+    const down_btn = document.createElement('button');
+    down_btn.classList.add("add-info-btn");
+    down_btn.classList.add("move-btn");
+    down_btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-arrow-down-circle" ' +
+                                ' viewBox="0 0 16 16">' +
+                            '<path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 ' +
+                            ' 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 ' +
+                            ' 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>' +
+                        '</svg>' +
+                        '<p>Move</p>';
+    down_btn.addEventListener("click", () => moveChar(id, -1));
+    box.appendChild(down_btn);
 
     info.appendChild(box);
 
@@ -407,5 +433,24 @@ function nextTurn() {
         document.querySelector('.character-box').classList.add("selected-caracter-box");
     } else {
         curr.nextSibling.classList.add("selected-caracter-box");
+    }
+}
+
+function moveChar(id, dir) {
+    if (dir > 0 && document.querySelector(".character-box").id == id) return;
+
+    if (dir < 0 && document.querySelector('#' + id) == document.querySelector('main').lastChild) return;
+
+    if (dir > 0) {
+        document.querySelector("main").insertBefore(document.querySelector("#" + id),
+                                                    document.querySelector("#" + id).previousSibling);
+        document.querySelector("main").insertBefore(document.querySelector("#" + id + "-info"),
+                                                    document.querySelector("#" + id).nextSibling);
+    } else if (dir < 0) {
+        console.log(document.querySelector("#" + id + "-info").nextSibling.id);
+        document.querySelector("main").insertBefore(document.querySelector("#" + id + "-info").nextSibling,
+                                                    document.querySelector("#" + id + "-info"));
+        document.querySelector("main").insertBefore(document.querySelector("#" + id),
+                                                    document.querySelector("#" + id + "-info"));
     }
 }

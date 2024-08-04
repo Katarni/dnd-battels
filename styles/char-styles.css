@@ -105,6 +105,45 @@
     color: #b4637a;
 }
 
+.move-btn {
+    color: #907aa9;
+    border: 2px solid #907aa9;
+}
+
+@media (hover: hover) {
+    #health-btn:hover {
+        background: #56949f;
+        color: #f2e9e1;
+    }
+
+    #delete-btn:hover {
+        background: #b4637a;
+        color: #f2e9e1;
+    }
+
+    .move-btn:hover {
+        background: #907aa9;
+        color: #f2e9e1;
+    }
+}
+
+@media (hover: none) {
+    #health-btn:active {
+        background: #56949f;
+        color: #f2e9e1;
+    }
+
+    #delete-btn:active {
+        background: #b4637a;
+        color: #f2e9e1;
+    }
+
+    .move-btn:active {
+        background: #907aa9;
+        color: #f2e9e1;
+    }
+}
+
 .add-info-btn {
     background: transparent;
     border-radius: 10px;
