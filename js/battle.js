@@ -78,7 +78,7 @@ function addCharacter() {
     document.querySelector("[name='max-hp']").value = "";
     document.querySelector("[name='initiative']").value = "";
 
-    document.querySelector('.add-char-box').insertAdjacentElement("afterend", getCharElm(localStorage.getItem("counting")));
+    document.querySelector('main').appendChild(getCharElm(localStorage.getItem("counting")));
 
     setHealthColor(localStorage.getItem("counting"));
 
